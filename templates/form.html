@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+<div class="row">
+    <div class="col-md-6 col-md-offset-2">
+
+        <h3>Mail send test</h3>
+<form method="post" action="{% url 'sendmail'  %}">
+    {% csrf_token %}
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" name="email">
+    <br/>
+    <br/>
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name">
+    <br/>
+    <label for="subject">Subject</label>
+    <input type="text" class="form-control" id="subject" name="subject">
+    <br/>
+
+    <label for="message">Message</label>
+    <textarea id="message" class="form-control" name="message"> </textarea>
+    <br/>
+    <button class="btn btn-primary" type="submit">Send</button>
+</form>
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="alert {% if message.tags == 'error' %} alert-danger {% else %} alert-success {% endif %}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    </div>
+</div>
+
+</body>
+</html>
